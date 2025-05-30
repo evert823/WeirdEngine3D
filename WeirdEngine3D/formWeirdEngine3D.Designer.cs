@@ -44,6 +44,7 @@
             this.menuItem12 = new System.Windows.Forms.MenuItem();
             this.lblInformation = new System.Windows.Forms.Label();
             this.btnAbort = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // mainMenu1
@@ -146,18 +147,29 @@
             // btnAbort
             // 
             this.btnAbort.Enabled = false;
-            this.btnAbort.Location = new System.Drawing.Point(41, 212);
+            this.btnAbort.Location = new System.Drawing.Point(32, 378);
             this.btnAbort.Name = "btnAbort";
             this.btnAbort.Size = new System.Drawing.Size(75, 23);
             this.btnAbort.TabIndex = 1;
             this.btnAbort.Text = "ABORT";
             this.btnAbort.UseVisualStyleBackColor = true;
+            this.btnAbort.Click += new System.EventHandler(this.btnAbort_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(32, 61);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(480, 299);
+            this.textBox1.TabIndex = 2;
+            this.textBox1.Text = "{\r\n    \"positionfilename\": \"mate_in_7_for_black_BN.json\",\r\n    \"depth\": 14\r\n}";
             // 
             // formWeirdEngine3D
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.btnAbort);
             this.Controls.Add(this.lblInformation);
             this.Menu = this.mainMenu1;
@@ -186,6 +198,7 @@
         private System.Windows.Forms.Label lblInformation;
         private System.Windows.Forms.MenuItem menuItem12;
         private System.Windows.Forms.Button btnAbort;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 

@@ -38,7 +38,17 @@ namespace WeirdEngine3D
 
         private void menuItem8_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Suggest move Under construction");
+            this.DisableGUI();
+            MyWeirdEngineJson.Load_UI_Input_Json(this.textBox1.Text);
+            string s = MyWeirdEngineJson.MyUI_Input.positionfilename.Replace(".json", "");
+            //MessageBox.Show(MyWeirdEngineJson.MyUI_Input.positionfilename);
+            //MessageBox.Show(MyWeirdEngineJson.MyUI_Input.depth.ToString());
+            MyWeirdEngineJson.LoadPositionJson(MyWeirdEngineJson.jsonsourcepath + "positions", s);
+            MyWeirdEngineJson.SavePositionAsJson(MyWeirdEngineJson.jsonworkpath + "positions_verify\\", s);
+            calculationresponse a = MyWeirdEngineMoveFinder.Calculation_tree(MyWeirdEngineJson.MyUI_Input.depth);
+            this.RefreshInformation();
+            MessageBox.Show(MyWeirdEngineMoveFinder.FinalResponseLogString(a));
+            this.EnableGUI();
         }
 
         private void menuItem9_Click(object sender, EventArgs e)
@@ -48,7 +58,15 @@ namespace WeirdEngine3D
 
         private void menuItem10_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Load position Under construction");
+            this.DisableGUI();
+            MyWeirdEngineJson.Load_UI_Input_Json(this.textBox1.Text);
+            string s = MyWeirdEngineJson.MyUI_Input.positionfilename.Replace(".json", "");
+            MessageBox.Show(MyWeirdEngineJson.MyUI_Input.positionfilename + "/" +
+                MyWeirdEngineJson.MyUI_Input.depth.ToString());
+            MyWeirdEngineJson.LoadPositionJson(MyWeirdEngineJson.jsonsourcepath + "positions", s);
+            MyWeirdEngineJson.SavePositionAsJson(MyWeirdEngineJson.jsonworkpath + "positions_verify\\", s);
+            this.RefreshInformation();
+            this.EnableGUI();
         }
 
         private void menuItem11_Click(object sender, EventArgs e)
@@ -68,11 +86,19 @@ namespace WeirdEngine3D
         private void DisableGUI()
         {
             this.menuItem2.Enabled = false;
+            this.menuItem3.Enabled = false;
+            this.menuItem4.Enabled = false;
+            this.menuItem5.Enabled = false;
+            this.textBox1.Enabled = false;
             this.btnAbort.Enabled = true;
         }
         private void EnableGUI()
         {
             this.menuItem2.Enabled = true;
+            this.menuItem3.Enabled = true;
+            this.menuItem4.Enabled = true;
+            this.menuItem5.Enabled = true;
+            this.textBox1.Enabled = true;
             this.btnAbort.Enabled = false;
         }
         private void formWeirdEngine3D_Load(object sender, EventArgs e)
@@ -110,6 +136,11 @@ namespace WeirdEngine3D
             Mymfunittests.RunNewUnittests(unittestpath);
             this.RefreshInformation();
             this.EnableGUI();
+        }
+
+        private void btnAbort_Click(object sender, EventArgs e)
+        {
+            MyWeirdEngineMoveFinder.externalabort = true;
         }
     }
 }

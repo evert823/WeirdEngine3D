@@ -11,6 +11,11 @@ using Newtonsoft.Json.Linq;
 
 namespace TheWeirdEngine
 {
+    public struct UI_Input
+    {
+        public string positionfilename;
+        public int depth;
+    }
     public struct jsonpiecenamelist
     {
         public string[] piecetypes;
@@ -56,6 +61,7 @@ namespace TheWeirdEngine
     public class WeirdEngineJson
     {
         public WeirdEngineMoveFinder MyWeirdEngineMoveFinder;
+        public UI_Input MyUI_Input;
         public string jsonsourcepath;
         public string jsonworkpath;
         public string logfilename;
@@ -83,6 +89,14 @@ namespace TheWeirdEngine
                 writer.WriteLine(myts + " " + themessage);
                 writer.Close();
             }
+        }
+        public void Load_UI_Input_Json(string intext)
+        {
+            string json;
+            json = intext;
+            dynamic dummy = JsonConvert.DeserializeObject(json);
+            this.MyUI_Input.positionfilename = dummy.positionfilename;
+            this.MyUI_Input.depth = dummy.depth;
         }
         public void LoadEngineSettingsFromJson(string pFileName)
         {
@@ -198,6 +212,9 @@ namespace TheWeirdEngine
             string s;
 
             s = "";
+
+            if (MyWeirdEngineMoveFinder.positionstack[0].colourtomove == 1) { s += "White to move\n"; }
+            else { s += "Black to move\n"; }
 
             s = s + "presort_when_depth_gt " + MyWeirdEngineMoveFinder.myenginesettings.presort_when_depth_gt.ToString() + "\n";
             s = s + "SearchForFastestMate " + MyWeirdEngineMoveFinder.myenginesettings.setting_SearchForFastestMate.ToString() + "\n";
@@ -388,7 +405,7 @@ namespace TheWeirdEngine
             }
             string s = myalphabet.ToLower()[pi].ToString();
             s += (pj + 1).ToString();
-            s = (pz + 1).ToString() + ":" + s;
+            s += "[" + (pz + 1).ToString() + "]";
             return s;
         }
         public string ShortNotation(chessmove pmove, bool displayvalue)
