@@ -411,8 +411,8 @@ namespace TheWeirdEngine
             DateTime enddatetime = DateTime.Now;
             int secondsneeded = (int)(enddatetime - startdatetime).TotalSeconds;
 
-            MessageBox.Show(ppositionfilename + " observed secondsneeded " + secondsneeded.ToString()
-                                              + " baseline_seconds " + baseline_seconds.ToString());
+            //MessageBox.Show(ppositionfilename + " observed secondsneeded " + secondsneeded.ToString()
+            //                                  + " baseline_seconds " + baseline_seconds.ToString());
 
             if (secondsneeded > baseline_seconds)
             {
@@ -451,19 +451,49 @@ namespace TheWeirdEngine
             TestMove(ppath, "03A_divergent_black", "Hunter", 2, 3, 0, 2, 4, 0, false);
             TestMove(ppath, "03A_divergent_black", "Hunter", 2, 3, 0, 4, 3, 0, false);
 
+            TestMove(ppath, "03A_divergent_white_swap_xz", "Hunter", 0, 5, 4, 0, 6, 4, true);
+            TestMove(ppath, "03A_divergent_white_swap_xz", "Hunter", 0, 5, 4, 0, 6, 2, true);
+            TestMove(ppath, "03A_divergent_black_swap_xz", "Hunter", 0, 3, 2, 0, 2, 2, true);
+            TestMove(ppath, "03A_divergent_black_swap_xz", "Hunter", 0, 3, 2, 0, 4, 4, true);
+            TestMove(ppath, "03A_divergent_white_swap_xz", "Hunter", 0, 5, 4, 0, 4, 4, false);
+            TestMove(ppath, "03A_divergent_white_swap_xz", "Hunter", 0, 5, 4, 0, 5, 2, false);
+            TestMove(ppath, "03A_divergent_black_swap_xz", "Hunter", 0, 3, 2, 0, 4, 2, false);
+            TestMove(ppath, "03A_divergent_black_swap_xz", "Hunter", 0, 3, 2, 0, 3, 4, false);
+
+            TestMove(ppath, "03A_divergent_white_swap_yz", "Hunter", 4, 0, 5, 4, 0, 6, true);
+            TestMove(ppath, "03A_divergent_white_swap_yz", "Hunter", 4, 0, 5, 2, 0, 6, true);
+            TestMove(ppath, "03A_divergent_black_swap_yz", "Hunter", 2, 0, 3, 2, 0, 2, true);
+            TestMove(ppath, "03A_divergent_black_swap_yz", "Hunter", 2, 0, 3, 4, 0, 4, true);
+            TestMove(ppath, "03A_divergent_white_swap_yz", "Hunter", 4, 0, 5, 4, 0, 4, false);
+            TestMove(ppath, "03A_divergent_white_swap_yz", "Hunter", 4, 0, 5, 2, 0, 5, false);
+            TestMove(ppath, "03A_divergent_black_swap_yz", "Hunter", 2, 0, 3, 2, 0, 4, false);
+            TestMove(ppath, "03A_divergent_black_swap_yz", "Hunter", 2, 0, 3, 4, 0, 3, false);
+
             TestCheck(ppath, "04A_check_white");
             TestCheck(ppath, "04A_check_black");
+
             TestStalemate(ppath, "05A_stalemate_white");
             TestStalemate(ppath, "05A_stalemate_black");
+            TestStalemate(ppath, "05A_stalemate_white_swap_xz");
+            TestStalemate(ppath, "05A_stalemate_black_swap_xz");
+            TestStalemate(ppath, "05A_stalemate_white_swap_yz");
+            TestStalemate(ppath, "05A_stalemate_black_swap_yz");
+
             TestMate(ppath, "06A_mate_0_white");
             TestMate(ppath, "06A_mate_0_black");
 
             TestMate_n(ppath, "06B_mate_1_white", 1, 5, 1, 0, 2, 4, 0);
             TestMate_n(ppath, "06B_mate_1_black", 1, 5, 6, 0, 2, 3, 0);
+            TestMate_n(ppath, "06B_mate_1_white_swap_xz", 1, 0, 1, 5, 0, 4, 2);
+            TestMate_n(ppath, "06B_mate_1_black_swap_xz", 1, 0, 6, 5, 0, 3, 2);
+            TestMate_n(ppath, "06B_mate_1_white_swap_yz", 1, 5, 0, 1, 2, 0, 4);
+            TestMate_n(ppath, "06B_mate_1_black_swap_yz", 1, 5, 0, 6, 2, 0, 3);
+
             TestMate_n(ppath, "06C_mate_2_white_01", 2, 0, 1, 0, 6, 7, 0);
             TestMate_n(ppath, "06C_mate_2_white_02", 2, 7, 1, 0, 1, 7, 0);
             TestMate_n(ppath, "06C_mate_2_black_01", 2, 7, 6, 0, 1, 0, 0);
             TestMate_n(ppath, "06C_mate_2_black_02", 2, 0, 6, 0, 6, 0, 0);
+
             MyWeirdEngineMoveFinder.myenginesettings.setting_SearchForFastestMate = false;
             TestMate_n(ppath, "06D_huntermate_3_white", 3, 2, 4, 0, 1, 4, 0);
             TestMate_n(ppath, "06D_huntermate_3_black", 3, 2, 3, 0, 1, 3, 0);
@@ -471,11 +501,31 @@ namespace TheWeirdEngine
             TestMate_n(ppath, "06D_huntermate_3_white", 3, 2, 4, 0, 1, 4, 0);
             TestMate_n(ppath, "06D_huntermate_3_black", 3, 2, 3, 0, 1, 3, 0);
 
+            MyWeirdEngineMoveFinder.myenginesettings.setting_SearchForFastestMate = false;
+            TestMate_n(ppath, "06D_huntermate_3_white_swap_xz", 3, 0, 4, 2, 0, 4, 1);
+            TestMate_n(ppath, "06D_huntermate_3_black_swap_xz", 3, 0, 3, 2, 0, 3, 1);
+            MyWeirdEngineMoveFinder.myenginesettings.setting_SearchForFastestMate = true;
+            TestMate_n(ppath, "06D_huntermate_3_white_swap_xz", 3, 0, 4, 2, 0, 4, 1);
+            TestMate_n(ppath, "06D_huntermate_3_black_swap_xz", 3, 0, 3, 2, 0, 3, 1);
+
+            MyWeirdEngineMoveFinder.myenginesettings.setting_SearchForFastestMate = false;
+            TestMate_n(ppath, "06D_huntermate_3_white_swap_yz", 3, 2, 0, 4, 1, 0, 4);
+            TestMate_n(ppath, "06D_huntermate_3_black_swap_yz", 3, 2, 0, 3, 1, 0, 3);
+            MyWeirdEngineMoveFinder.myenginesettings.setting_SearchForFastestMate = true;
+            TestMate_n(ppath, "06D_huntermate_3_white_swap_yz", 3, 2, 0, 4, 1, 0, 4);
+            TestMate_n(ppath, "06D_huntermate_3_black_swap_yz", 3, 2, 0, 3, 1, 0, 3);
+
             TestStalemate_n(ppath, "08A_stalemate_2_white", 2);
             TestStalemate_n(ppath, "08A_stalemate_2_black", 2);
 
             TestStalemate_n(ppath, "08B_insufficient_material_1", 14);
+            TestStalemate_n(ppath, "08B_insufficient_material_1_swap_xz", 14);
+            TestStalemate_n(ppath, "08B_insufficient_material_1_swap_yz", 14);
+
             TestStalemate_n(ppath, "08B_insufficient_material_2", 14);
+            TestStalemate_n(ppath, "08B_insufficient_material_2_swap_xz", 14);
+            TestStalemate_n(ppath, "08B_insufficient_material_2_swap_yz", 14);
+
             TestStalemate_n(ppath, "08B_insufficient_material_3", 14);
             TestStalemate_n(ppath, "08B_insufficient_material_4", 14);
             TestStalemate_n(ppath, "08B_insufficient_material_5", 14);
@@ -488,13 +538,22 @@ namespace TheWeirdEngine
             TestMate_n(ppath, "08C_sufficient_material_mate_1_white_01", 1, 3, 4, 0, 2, 6, 0);
             TestMate_n(ppath, "08C_sufficient_material_mate_1_white_02", 1, 3, 4, 0, 1, 5, 0);
             TestMate_n(ppath, "08C_sufficient_material_mate_1_white_03", 1, 3, 4, 0, 1, 5, 0);
+
             TestMate_n(ppath, "08C_sufficient_material_mate_2_white_01", 2, 4, 3, 0, 3, 4, 0);
+            TestMate_n(ppath, "08C_sufficient_material_mate_2_white_01_swap_xz", 2, 0, 3, 4, 0, 4, 3);
+            TestMate_n(ppath, "08C_sufficient_material_mate_2_white_01_swap_yz", 2, 4, 0, 3, 3, 0, 4);
+
             TestMate_n(ppath, "08C_sufficient_material_mate_1_black_01", 1, 3, 3, 0, 2, 1, 0);
             TestMate_n(ppath, "08C_sufficient_material_mate_1_black_02", 1, 3, 3, 0, 1, 2, 0);
             TestMate_n(ppath, "08C_sufficient_material_mate_1_black_03", 1, 3, 3, 0, 1, 2, 0);
+
             TestMate_n(ppath, "08C_sufficient_material_mate_2_black_01", 2, 4, 4, 0, 3, 3, 0);
+            TestMate_n(ppath, "08C_sufficient_material_mate_2_black_01_swap_xz", 2, 0, 4, 4, 0, 3, 3);
+            TestMate_n(ppath, "08C_sufficient_material_mate_2_black_01_swap_yz", 2, 4, 0, 4, 3, 0, 3);
+
             TestMate_n(ppath, "08C_sufficient_material_mate_2_white_02", 2, 5, 5, 0, 6, 5, 0);
             TestMate_n(ppath, "08C_sufficient_material_mate_2_black_02", 2, 5, 2, 0, 6, 2, 0);
+
             TestDraw_n(ppath, "08D_forced_draw_white_01", 7);
             TestDraw_n(ppath, "08D_forced_draw_black_01", 7);
             TestDraw_n(ppath, "08D_forced_draw_white_02", 6);
@@ -506,6 +565,22 @@ namespace TheWeirdEngine
             MyWeirdEngineMoveFinder.myenginesettings.setting_SearchForFastestMate = true;
             BaselinePerformance(ppath, "07A_mate_4_white_BN", 8, 5);
             BaselinePerformance(ppath, "07A_mate_4_black_BN", 8, 5);
+
+            MyWeirdEngineMoveFinder.myenginesettings.setting_SearchForFastestMate = false;
+            BaselinePerformance(ppath, "07A_mate_4_white_BN_swap_xz", 8, 3);
+            BaselinePerformance(ppath, "07A_mate_4_black_BN_swap_xz", 8, 3);
+            MyWeirdEngineMoveFinder.myenginesettings.setting_SearchForFastestMate = true;
+            BaselinePerformance(ppath, "07A_mate_4_white_BN_swap_xz", 8, 5);
+            BaselinePerformance(ppath, "07A_mate_4_black_BN_swap_xz", 8, 5);
+
+            MyWeirdEngineMoveFinder.myenginesettings.setting_SearchForFastestMate = false;
+            BaselinePerformance(ppath, "07A_mate_4_white_BN_swap_yz", 8, 3);
+            BaselinePerformance(ppath, "07A_mate_4_black_BN_swap_yz", 8, 3);
+            MyWeirdEngineMoveFinder.myenginesettings.setting_SearchForFastestMate = true;
+            BaselinePerformance(ppath, "07A_mate_4_white_BN_swap_yz", 8, 5);
+            BaselinePerformance(ppath, "07A_mate_4_black_BN_swap_yz", 8, 5);
+
+
 
             TestMate_n(ppath, "15A_mate_in_1_nightrider_white", 1, 0, 2, 0, 1, 4, 0);
             TestMate_n(ppath, "15A_mate_in_1_nightrider_black", 1, 9, 5, 0, 8, 3, 0);
@@ -530,8 +605,9 @@ namespace TheWeirdEngine
         {
             AllTestsPassed = true;
             MyWeirdEngineMoveFinder.myenginesettings.setting_SearchForFastestMate = true;
-            MyWeirdEngineMoveFinder.myenginesettings.display_when_depth_gt = -1;
+            MyWeirdEngineMoveFinder.myenginesettings.display_when_depth_gt = 7;
             MessageBox.Show("Start with running new unittests");
+
 
 
             if (AllTestsPassed == true)
