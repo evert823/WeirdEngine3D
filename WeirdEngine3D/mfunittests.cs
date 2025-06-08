@@ -52,8 +52,10 @@ namespace TheWeirdEngine
             string givenmvstr;
             givenmvstr = expectedmovingpiecename + "|" + pi1.ToString()
                                                  + "|" + pj1.ToString()
+                                                 + "|" + pz1.ToString()
                                                  + "|" + pi2.ToString()
-                                                 + "|" + pj2.ToString();
+                                                 + "|" + pj2.ToString()
+                                                 + "|" + pz2.ToString();
             if (mymovehappened == false & IsExpected == true)
             {
                 MessageBox.Show(ppositionfilename + givenmvstr + " did not happen but was expected");
@@ -592,6 +594,22 @@ namespace TheWeirdEngine
             TestMate_high_depth(ppath, "14B_mate_in_2_depth_5_bug_white", 5, 7, 3, 0, 6, 2, 0);
             TestMate_high_depth(ppath, "14B_mate_in_2_depth_5_bug_black", 5, 7, 4, 0, 6, 5, 0);
 
+            MyWeirdEngineJson.LoadPieceTypesFromJson("unittestgame");
+            TestMove(ppath, "16A_limited_range_white", "Queen3", 4, 4, 4, 7, 7, 4, true);
+            TestMove(ppath, "16A_limited_range_white", "Queen3", 4, 4, 4, 8, 8, 4, false);
+            TestMove(ppath, "16A_limited_range_white", "Queen3", 4, 4, 4, 1, 1, 4, true);
+            TestMove(ppath, "16A_limited_range_white", "Queen3", 4, 4, 4, 0, 4, 4, false);
+            TestMove(ppath, "16A_limited_range_white", "Queen3", 4, 4, 4, 4, 4, 2, true);
+            TestMove(ppath, "16A_limited_range_white", "Queen3", 4, 4, 4, 4, 4, 6, false);
+
+            TestMove(ppath, "16A_limited_range_black", "Queen3", 4, 4, 4, 7, 7, 4, true);
+            TestMove(ppath, "16A_limited_range_black", "Queen3", 4, 4, 4, 8, 8, 4, false);
+            TestMove(ppath, "16A_limited_range_black", "Queen3", 4, 4, 4, 1, 1, 4, true);
+            TestMove(ppath, "16A_limited_range_black", "Queen3", 4, 4, 4, 0, 4, 4, false);
+            TestMove(ppath, "16A_limited_range_black", "Queen3", 4, 4, 4, 4, 4, 2, true);
+            TestMove(ppath, "16A_limited_range_black", "Queen3", 4, 4, 4, 4, 4, 6, false);
+
+
             if (AllTestsPassed == true)
             {
                 MessageBox.Show("All unittests passed");
@@ -607,8 +625,6 @@ namespace TheWeirdEngine
             MyWeirdEngineMoveFinder.myenginesettings.setting_SearchForFastestMate = true;
             MyWeirdEngineMoveFinder.myenginesettings.display_when_depth_gt = 7;
             MessageBox.Show("Start with running new unittests");
-
-
 
             if (AllTestsPassed == true)
             {
