@@ -26,11 +26,18 @@ namespace TheWeirdEngine
         public int consult_tt_when_depth_gt;
         public int store_in_tt_when_depth_gt;
     }
+    public struct location
+    {
+        public int x;
+        public int y;
+        public int z;
+    }
     public struct vector
     {
         public int x;
         public int y;
         public int z;
+        public int maxrange;//zero or negative means: no maxrange specified
     }
     public enum SpecialPiece
     {
@@ -89,8 +96,8 @@ namespace TheWeirdEngine
         public int colourtomove;
         public int[,,] squares;//python square[z][j][i] becomes C# square[i, j, z]
         public squareInfoItem[,,] squareInfo;
-        public vector whitekingcoord;
-        public vector blackkingcoord;
+        public location whitekingcoord;
+        public location blackkingcoord;
 
         public bool WhiteBareKing;
         public bool BlackBareKing;

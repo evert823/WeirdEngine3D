@@ -13,7 +13,7 @@ namespace TheWeirdEngine
 {
     public struct cornerInfo
     {
-        public vector cornercoord;
+        public location cornercoord;
         public int DistanceToKing;
         public bool BishopCanAttack;
     }
@@ -29,7 +29,7 @@ namespace TheWeirdEngine
             return MyWeirdEngineMoveFinder.MyBoardTopology.DistanceBetweenSquares[i1, j1, i2, j2, z1, z2];
         }
 
-        public cornerInfo CheckOneCorner(ref chessposition pposition, int i, int j, int z, vector targetkingcoord)
+        public cornerInfo CheckOneCorner(ref chessposition pposition, int i, int j, int z, location targetkingcoord)
         {
             cornerInfo myresult;
             myresult.cornercoord.x = i;
@@ -62,7 +62,7 @@ namespace TheWeirdEngine
             }
             return myresult;
         }
-        public cornerInfo PickCorner(ref chessposition pposition, vector targetkingcoord)
+        public cornerInfo PickCorner(ref chessposition pposition, location targetkingcoord)
         {
             //Output: x, y, distance, bishop-aligned
 
@@ -101,7 +101,7 @@ namespace TheWeirdEngine
         {
             //Handle the position where one has bare King and the other has mating material
             //(This is already validated before we enter here)
-            vector targetkingcoord;
+            location targetkingcoord;
             int sumofsquareddistances;
             int numberofchasingpieces;
             int d;
