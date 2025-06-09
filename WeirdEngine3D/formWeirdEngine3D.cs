@@ -142,5 +142,19 @@ namespace WeirdEngine3D
         {
             MyWeirdEngineMoveFinder.externalabort = true;
         }
+
+        private void menuItem13_Click(object sender, EventArgs e)
+        {
+            mfunittests Mymfunittests;
+            string infilename = "unittestgame";
+            MyWeirdEngineJson.LoadPieceTypesFromJson(infilename);
+            MyWeirdEngineJson.SavePieceTypesAsJson(infilename);
+            this.DisableGUI();
+            string unittestpath = this.MyWeirdEngineJson.jsonsourcepath + "unittests";
+            Mymfunittests = new mfunittests(this.MyWeirdEngineMoveFinder, this.MyWeirdEngineJson);
+            Mymfunittests.RunPerformancetests(unittestpath);
+            this.RefreshInformation();
+            this.EnableGUI();
+        }
     }
 }

@@ -45,6 +45,7 @@
             this.lblInformation = new System.Windows.Forms.Label();
             this.btnAbort = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.menuItem13 = new System.Windows.Forms.MenuItem();
             this.SuspendLayout();
             // 
             // mainMenu1
@@ -120,7 +121,8 @@
             this.menuItem5.Index = 3;
             this.menuItem5.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
             this.menuItem11,
-            this.menuItem12});
+            this.menuItem12,
+            this.menuItem13});
             this.menuItem5.Text = "TestNew";
             // 
             // menuItem11
@@ -164,6 +166,12 @@
             this.textBox1.TabIndex = 2;
             this.textBox1.Text = "{\r\n    \"positionfilename\": \"mate_in_7_for_black_BN.json\",\r\n    \"depth\": 14\r\n}";
             // 
+            // menuItem13
+            // 
+            this.menuItem13.Index = 2;
+            this.menuItem13.Text = "Baseline performance";
+            this.menuItem13.Click += new System.EventHandler(this.menuItem13_Click);
+            // 
             // formWeirdEngine3D
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -199,6 +207,7 @@
         private System.Windows.Forms.MenuItem menuItem12;
         private System.Windows.Forms.Button btnAbort;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.MenuItem menuItem13;
     }
 }
 

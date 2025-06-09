@@ -131,7 +131,6 @@ namespace TheWeirdEngine
                     {
                         if (pposition.squares[i, j, z] != 0)
                         {
-                            this.GetStepLeapAttacksMoves(ref pposition, i, j, z, depth);
                             this.GetSlideAttacksMoves(ref pposition, i, j, z, depth);
                         }
                         if (depth > 0)
@@ -146,81 +145,6 @@ namespace TheWeirdEngine
                 }
             }
             Default_moveprioindex(ref pposition);
-        }
-        public void GetStepLeapAttacksMovesPerVector(ref chessposition pposition, int i, int j, int z, vector v,
-                                                     bool getcaptures, bool getnoncaptures, int depth, int pti,
-                                                     int pti_self)
-        {
-            int i2;
-            int j2;
-            int z2;
-            int movei;
-            i2 = i + v.x;
-            if (pposition.squares[i, j, z] > 0)
-            {
-                j2 = j + v.y;
-            }
-            else
-            {
-                j2 = j - v.y;
-            }
-            z2 = z + v.z;
-            if (i2 >= 0 & i2 < pposition.boardwidth & j2 >= 0 & j2 < pposition.boardheight
-                & z2 >= 0 & z2 < pposition.depth_3d)
-            {
-                if (getcaptures == true)
-                {
-                    this.MarkAttacked(ref pposition, i2, j2, z2, pposition.squares[i, j, z]);
-                    if (depth > 0)
-                    {
-                        if ((pposition.squares[i2, j2, z2] > 0 & pposition.squares[i, j, z] < 0 & pposition.colourtomove < 0) ||
-                            (pposition.squares[i2, j2, z2] < 0 & pposition.squares[i, j, z] > 0 & pposition.colourtomove > 0))
-                        {
-                            movei = pposition.movelist_totalfound;
-                            InitializeMove(ref pposition, movei, i, j, z, i2, j2, z2);
-                            pposition.movelist[movei].MovingPiece = pposition.squares[i, j, z];
-                            pposition.movelist[movei].IsCapture = true;
-                            AssignCapturedValue(pposition, ref pposition.movelist[movei], i2, j2, z2);
-                            GetPromotion(ref pposition, movei, pti, pti_self);
-                        }
-                    }
-                }
-                if (getnoncaptures == true & depth > 0)
-                {
-                    if ((pposition.squares[i2, j2, z2] == 0 & pposition.squares[i, j, z] < 0 & pposition.colourtomove < 0) ||
-                        (pposition.squares[i2, j2, z2] == 0 & pposition.squares[i, j, z] > 0 & pposition.colourtomove > 0))
-                    {
-                        movei = pposition.movelist_totalfound;
-                        InitializeMove(ref pposition, movei, i, j, z, i2, j2, z2);
-                        pposition.movelist[movei].MovingPiece = pposition.squares[i, j, z];
-                        GetPromotion(ref pposition, movei, pti, pti_self);
-                    }
-                }
-            }
-        }
-        public void GetStepLeapAttacksMoves(ref chessposition pposition, int i, int j, int z, int depth)
-        {
-            int pti = MyWeirdEngineMoveFinder.pieceTypeIndex(pposition.squares[i, j, z]);
-            int pti_self = pti;
-
-            if (MyWeirdEngineMoveFinder.piecetypes[pti].IsDivergent == false)
-            {
-                foreach (vector v in MyWeirdEngineMoveFinder.piecetypes[pti].stepleapmovevectors)
-                {
-                    GetStepLeapAttacksMovesPerVector(ref pposition, i, j, z, v, true, true, depth, pti, pti_self);
-                }
-            }
-            else
-            {
-                foreach (vector v in MyWeirdEngineMoveFinder.piecetypes[pti].stepleapmovevectors)
-                {
-                    GetStepLeapAttacksMovesPerVector(ref pposition, i, j, z, v, false, true, depth, pti, pti_self);
-                }
-                foreach (vector v in MyWeirdEngineMoveFinder.piecetypes[pti].stepleapcapturevectors)
-                {
-                    GetStepLeapAttacksMovesPerVector(ref pposition, i, j, z, v, true, false, depth, pti, pti_self);
-                }
-            }
         }
         public bool maxrange_exceeded(int maxrangecounter, vector v)
         {

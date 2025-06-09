@@ -423,6 +423,13 @@ namespace TheWeirdEngine
                 AllTestsPassed = false;
             }
         }
+        public void BaselinePerformance2(string ppath, string ppositionfilename, int depth)
+        {
+            MyWeirdEngineJson.LoadPositionJson(ppath, ppositionfilename);
+            MyWeirdEngineJson.SavePositionAsJson(MyWeirdEngineJson.jsonworkpath + "positions_verify\\", ppositionfilename);
+            MyWeirdEngineMoveFinder.myenginesettings.display_when_depth_gt = depth - 1;
+            calculationresponse a = MyWeirdEngineMoveFinder.Calculation_tree(depth);
+        }
 
         public void RunAllUnittests(string ppath)
         {
@@ -634,6 +641,20 @@ namespace TheWeirdEngine
             {
                 MessageBox.Show("Some unittests failed");
             }
+        }
+        public void RunPerformancetests(string ppath)
+        {
+            MyWeirdEngineMoveFinder.myenginesettings.setting_SearchForFastestMate = true;
+            MessageBox.Show("START running performance tests");
+
+            BaselinePerformance2(ppath, "baseline_performance_mate_in_4", 8);
+            BaselinePerformance2(ppath, "baseline_performance_mate_in_4_swap_xz", 8);
+            BaselinePerformance2(ppath, "baseline_performance_mate_in_4_swap_yz", 8);
+            BaselinePerformance2(ppath, "baseline_performance_mate_in_6_for_white_BN", 12);
+            BaselinePerformance2(ppath, "baseline_performance_mate_in_6_for_white_BN_swap_xz", 12);
+            BaselinePerformance2(ppath, "baseline_performance_mate_in_6_for_white_BN_swap_yz", 12);
+
+            MessageBox.Show("END running performance tests");
         }
 
     }
