@@ -38,6 +38,9 @@ namespace TheWeirdEngine
         public int y;
         public int z;
         public int maxrange;//zero or negative means: no maxrange specified
+        public location[] ifvacant;//all squares given by ifvacant must be vacant
+                                   //or the move will not be generated
+                                   //e.g. Xiangqi Horse 1, 2 comes with ifvacant 0,1
     }
     public enum SpecialPiece
     {
